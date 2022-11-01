@@ -1,14 +1,114 @@
 #include <stdio.h>
 
-
-
-
 int capacity[100] = { 0 };
+void reserve_boarding(int section)
+{
+	int seat = 0;
+	if (section == 1)
+	{
+		for (int i = 0; i < 30; i++)
+		{
+			if (capacity[i] == 0)
+			{
+				capacity[i] = 1;
+				seat = i + 1;
+			}
+			if (seat != 0)
+				break;
+		}
+		if (seat != 0)
+		{
+			printf("**** 1. Boarding Pass ****\nYour section:%d\t\nYour seat:%d\t\n", section, seat);
+		}
+	}
+	else
+	{
+		for (int j = 30; j < 100; j++)
+		{
+			if (capacity[j] == 0)
+			{
+				capacity[j] = 1;
+				seat = j + 1;
+			}
+			if (seat != 0)
+				break;
+		}
+		if (seat != 0)
+		{
+			printf("**** 2.Boarding Pass ****\nYour section:%d\t\nYour seat:%d\t\n", section, seat);
+		}
+	}
+
+}
+
+
+// display message about next flight
+void next_flight(void)
+{
+	printf("/next flight eaves in 3 hours.\n");
+}
+int option_select()
+{
+	int class_option;
+
+	printf("Please type 1 for \"First Class\"\nPlease type 2 for\"Economy\" \n");
+
+	scanf("%d", &class_option);
+
+	while (class_option != 1 && class_option != 2)
+	{
+		printf("Please enter correct option!\n");
+		printf("Please type 1 for \"First Class\"\nPlease type 2 for \"Economy\"\n");
+
+		scanf("%d", &class_option);
+
+
+	}
+	return class_option;
+}
+
+
+
+
+// seats availability 
+int availability_cheacking(int opt)
+{
+	int counter_a = 0;
+	int counter_b = 0;
+	if (opt == 1)
+	{
+		for (int i = 0; i < 30; i++)
+		{
+			if (capacity[i] == 0)
+				counter_a++;
+
+		}
+	}
+	else
+	{
+		for (int j = 30; j < 100; j++)
+		{
+			if (capacity[j] == 0)
+				counter_b++;
+		}
+	}
+	if ((opt == 1 && counter_a > 0) || (opt == 2 && counter_b > 0))
+	{
+		printf("There is avaible place in section:\n");
+		return 1;
+	}
+	else
+	{
+		printf("There is no available place in section:\n");
+		return 0;
+	}
+}
+
 
 int main()
 {
 	int option;
-	int availability;
+	int availability=0;
 	int availability_other;
 
 	for (int x = 0; x < 101; x++)

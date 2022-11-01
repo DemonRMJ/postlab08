@@ -73,6 +73,7 @@ int option_select()
 // seats availability 
 int availability_cheacking(int opt)
 {
+	//changes
 	int counter_a = 0;
 	int counter_b = 0;
 	if (opt == 1)
